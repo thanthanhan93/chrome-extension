@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "Copy bình luận Facebook",
+  "version": "0.1.0",
+  "description": "Sao chép bình luận và phản hồi từ bài viết Facebook đang mở.",
+  "permissions": ["activeTab", "scripting", "clipboardWrite"],
+  "action": {
+    "default_title": "Copy bình luận Facebook",
+    "default_popup": "popup.html"
+  }
+}

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Copy bình luận Facebook</title>
+  <style>
+    body { font: 14px system-ui, sans-serif; width: 310px; padding: 12px; line-height: 1.5; }
+    button { padding: 8px 14px; cursor: pointer; }
+    #status { white-space: pre-wrap; }
+    textarea { width: 100%; min-height: 120px; box-sizing: border-box; }
+  </style>
+</head>
+<body>
+  <h1>Copy bình luận</h1>
+  <p>Mở riêng bài viết, chọn “Tất cả bình luận”, sau đó bấm nút bên dưới.</p>
+  <button id="copy" type="button">Tải và copy</button>
+  <p id="status" role="status" aria-live="polite"></p>
+  <textarea id="result" aria-label="Kết quả để copy thủ công" hidden readonly></textarea>
+  <script src="popup.js"></script>
+</body>
+</html>

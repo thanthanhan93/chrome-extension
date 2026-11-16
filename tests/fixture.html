@@ -1,0 +1,25 @@
+<!doctype html>
+<html><body>
+<main role="main">
+  <div role="article" id="post">
+    <div role="article"><h3><a href="#a">An</a></h3><div dir="auto">Bình luận đầu</div>
+      <div role="article"><h3><a href="#b">Bình</a></h3><div dir="auto">Phản hồi</div></div>
+    </div>
+    <button id="more">Xem thêm bình luận</button>
+  </div>
+</main>
+<pre id="output"></pre>
+<script src="../collector.js"></script>
+<script>
+  document.getElementById('more').onclick = function () {
+    const article = document.createElement('div');
+    article.setAttribute('role', 'article');
+    article.innerHTML = '<h3><a href="#c">Chi</a></h3><div dir="auto">Bình luận tải thêm</div>';
+    this.before(article);
+    this.remove();
+  };
+  window.__facebookCommentCopy.collect().then(result => {
+    document.getElementById('output').textContent = JSON.stringify(result);
+  });
+</script>
+</body></html>
