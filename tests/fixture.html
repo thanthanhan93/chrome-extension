@@ -1,16 +1,40 @@
 <!doctype html>
 <html><body>
-<main role="main">
-  <div role="article" id="post">
+<div role="dialog"><div role="dialog">Hộp thoại không liên quan</div>
+  <div role="dialog" id="post">
     <div role="article"><h3><a href="#a">An</a></h3><div dir="auto">Bình luận đầu</div>
-      <div role="article"><h3><a href="#b">Bình</a></h3><div dir="auto">Phản hồi</div></div>
+      <div role="article"><h3><a href="#b">Bình</a></h3><div dir="auto">Phản hồi</div>
+        <div role="article"><h3><a href="#e">Em</a></h3><div dir="auto">Phản hồi sâu</div></div>
+      </div>
     </div>
+    <div role="article" aria-label="Reply by user"><h3><a href="#f">Hoa</a></h3><div dir="auto">Phản hồi không rõ cha</div></div>
+    <button id="filter">Most relevant</button>
+    <div id="menu" role="menu" hidden><div role="menuitem" id="all">All comments<br>Show all comments</div></div>
     <button id="more">Xem thêm bình luận</button>
+    <div id="scrollbox" style="height:80px;overflow-y:auto"><div style="height:800px"></div></div>
   </div>
-</main>
+</div>
 <pre id="output"></pre>
 <script src="../collector.js"></script>
 <script>
+  const filter = document.getElementById('filter');
+  const menu = document.getElementById('menu');
+  filter.onclick = () => { menu.hidden = false; };
+  document.getElementById('all').onclick = () => { filter.textContent = 'All comments'; menu.hidden = true; };
+  const scrollbox = document.getElementById('scrollbox');
+  const scrollTop = Object.getOwnPropertyDescriptor(Element.prototype, 'scrollTop');
+  Object.defineProperty(scrollbox, 'scrollTop', {
+    get() { return scrollTop.get.call(this); },
+    set(value) { scrollTop.set.call(this, value); this.dispatchEvent(new Event('scroll')); }
+  });
+  scrollbox.onscroll = function () {
+    if (this.dataset.loaded) return;
+    this.dataset.loaded = 'yes';
+    const article = document.createElement('div');
+    article.setAttribute('role', 'article');
+    article.innerHTML = '<h3><a href="#d">Dũng</a></h3><div dir="auto">Bình luận khi cuộn</div>';
+    document.getElementById('post').append(article);
+  };
   document.getElementById('more').onclick = function () {
     const article = document.createElement('div');
     article.setAttribute('role', 'article');
@@ -19,7 +43,7 @@
     this.remove();
   };
   window.__facebookCommentCopy.collect().then(result => {
-    document.getElementById('output').textContent = JSON.stringify(result);
+    document.getElementById('output').textContent = JSON.stringify({ ...result, filter: filter.textContent });
   });
 </script>
 </body></html>
