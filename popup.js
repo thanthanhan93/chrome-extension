@@ -16,14 +16,28 @@ button.addEventListener('click', async () => {
     await chrome.scripting.executeScript({ target: { tabId: tab.id }, files: ['collector.js'] });
     const [execution] = await chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      func: () => window.__facebookCommentCopy.collect()
+      func: async () => {
+        try {
+          return { data: await window.__facebookCommentCopy.collect() };
+        } catch (error) {
+          return { error: error.message };
+        }
+      }
     });
-    const { comments, reason } = execution.result;
+    if (!execution?.result) throw new Error('Trang không trả về kết quả. Hãy tải lại trang và thử lại.');
+    if (execution.result.error) throw new Error(execution.result.error);
+    const { comments, reason } = execution.result.data;
     if (!comments.length) {
       statusMessage.textContent = `Không tìm thấy bình luận. ${reason}`;
       return;
     }
-    const text = comments.map(({ author, text }) => `${author}: ${text}`).join('\n');
+    const groups = new Map();
+    comments.forEach((comment, index) => {
+      const parent = comment.parentIndex;
+      if (parent === null || !groups.has(parent)) groups.set(index, [`${comment.unlinkedReply ? '[Phản hồi chưa xác định bình luận gốc] ' : ''}${comment.author}: ${comment.text}`]);
+      else groups.get(parent).push(`  ${comment.author}: ${comment.text}`);
+    });
+    const text = [...groups.values()].flat().join('\n');
     resultBox.value = text;
     try {
       await navigator.clipboard.writeText(text);

@@ -13,7 +13,7 @@ Dữ liệu được xử lý trên máy và không được tiện ích gửi �
 ## Sử dụng
 
 1. Đăng nhập Facebook và mở riêng bài viết muốn lấy bình luận.
-2. Nếu Facebook có bộ lọc bình luận, chọn **Tất cả bình luận**.
+2. Tiện ích thử chọn **Tất cả bình luận**, mở thêm phản hồi và cuộn để tải nội dung.
 3. Bấm biểu tượng tiện ích và chọn **Tải và copy**.
 4. Giữ cửa sổ tiện ích mở trong khi chạy, sau đó dán kết quả vào nơi cần dùng.
 5. Nếu Chrome từ chối ghi clipboard, copy nội dung trong ô kết quả.
@@ -22,10 +22,11 @@ Dữ liệu được xử lý trên máy và không được tiện ích gửi �
 
 Tiện ích chỉ đọc nội dung tài khoản đang đăng nhập có thể xem.
 Không có cách xác nhận rằng Facebook đã tải hoặc hiển thị toàn bộ bình luận, nên kết quả có thể thiếu.
-Tiện ích thử bấm nút tải thêm bằng tiếng Việt hoặc tiếng Anh và dừng sau tối đa 100 lượt.
+Tiện ích thử bấm nút tải thêm bằng tiếng Việt hoặc tiếng Anh và giới hạn số lượt tải.
+Phản hồi được thụt dưới bình luận gốc khi cấu trúc trang thể hiện quan hệ cha con.
+Một số giao diện Facebook không thể hiện rõ quan hệ này và kết quả có thể không xác định được bình luận gốc.
 Bình luận chỉ chứa ảnh, video hoặc nội dung không phải văn bản có thể bị bỏ qua.
 Facebook có thể thay đổi giao diện và làm tiện ích ngừng hoạt động hoặc đọc sai nội dung.
-Chưa kiểm thử tiện ích với bài viết Facebook thực tế.
 
 ## Kiểm thử
 
